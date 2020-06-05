@@ -198,11 +198,14 @@ for note in notes:
 # Since diminished chords cannot generate Roman Numerals, they are a dead end in the graph.
 
 
-def dfsPath(stNode, endNode, visited=[], path=[]):
+def dfsPath(stNode, endNode, visited=None, path=None):
     """
     Returns the first path found from a start to end node
     using depth first search in the the chords graph.
     """
+    if visited is None: visited = []
+    if path is None: path = []
+
     if stNode == endNode:
         visited.append(stNode)
         path.append(endNode)
@@ -214,8 +217,7 @@ def dfsPath(stNode, endNode, visited=[], path=[]):
         return path
 
     visited.append(stNode)
-
-    path += [stNode]
+    path.append(stNode)
 
     for rn in chords[stNode]:
         node = str(chords[stNode][rn])
